@@ -42,3 +42,9 @@ print('\n')
 print('And finally the whole string in binary')
 print(binary_whole_ip)
 print('\n')
+
+# Moving onto the subnet mask, get the 'network bits' portion of the mask:
+network_bits = int(mask) * '1'
+
+# Get the host bits portion of the mask:
+host_bits = (32 - int(mask)) * '0'
