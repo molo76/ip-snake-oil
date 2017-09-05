@@ -10,5 +10,5 @@ Enter a string, for example 192.168.0.100/24. The script should output the follo
 
 Python3 based. 
 
-- Sept 4th 2017 - 
+###### Sept 4th 2017 ###### 
 Working on sections to convert IP to binary values and to convert CIDR to binary and dotted decimal mask. 
