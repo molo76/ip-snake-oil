@@ -63,5 +63,13 @@ host_network_mask = '1' + host_bits
 print('Number of IPs in the subnet:\t\t\t' + str(int(host_network_mask, 2)))
 print('Number of host IPs available in this network:\t' + str(int(host_network_mask, 2) - 2))
 
+# Find interesting octet (network/host) boundary in subnet_mask: 
+for octet in subnet_mask_octets:
+    if octet != '255':
+       print(octet)
+       int_subnet_octet = subnet_mask_octets.index(octet)
+       break
+
+
 
 
