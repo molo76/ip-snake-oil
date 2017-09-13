@@ -1,10 +1,15 @@
 ## Python3 script for getting info about an IP/CIDR
 
 # Get some user input
+print('\n')
 y = input('Enter an IP address with CIDR mask, for example 10.100.23.1/24:\n')
 
 # Split the ip from the mask
 ip,mask = y.split('/')
+
+################
+## Work on IP ##
+################
 
 # Take the 4 octets from the IP and add them to a list called 'octets'
 octets = ip.split('.')
@@ -26,7 +31,11 @@ for octet in binary_octets:
 # Now the ip address is stored as 4 integers in the octets list, as 4 binary numbers in the binary_octets list, and as a whole binary string in the binary_whole_ip variable:
 
 print('\n')
-print('The IP entered was:\t\t\t\t' + ip)
+print('IP address:\t\t\t' + ip)
+
+##################
+## Work on Mask ##
+##################
 
 # Moving onto the subnet mask, get the 'network bits' portion of the mask:
 network_bits = int(mask) * '1'
@@ -37,39 +46,27 @@ host_bits = (32 - int(mask)) * '0'
 # Create the whole mask in binary:
 mask_bits = network_bits + host_bits
 
-# Now cut into 4 octets and turn into binary (not actually used anywhere in the script at present, so commented out)
-#mask_binary_octets = []
-#mask_binary_octets.append(mask_bits[0:7])
-#mask_binary_octets.append(mask_bits[8:15])
-#mask_binary_octets.append(mask_bits[16:23])
-#mask_binary_octets.append(mask_bits[24:31])
-
 # Create dotted decimal subnet mask string
 subnet_mask = str(int(mask_bits[0:8], 2)) + '.' + str(int(mask_bits[8:16], 2)) + '.' + str(int(mask_bits[16:24], 2)) + '.' + str(int(mask_bits[24:32], 2))
+print('Subnet Mask:\t\t\t' + subnet_mask)
 
-print('The subnet mask is:\t\t\t\t' + subnet_mask)
+# First IP (network address) in binary:
+network_binary = binary_whole_ip[0:int(mask)] + host_bits
+# Convert to dotted decimal notation:
+network_ip = str(int(network_binary[0:8], 2)) + '.' + str(int(network_binary[8:16], 2)) + '.' + str(int(network_binary[16:24], 2)) + '.' + str(int(network_binary[24:32], 2))
 
-# Now need to find the first & last host plus broadcast address. 
+# Last IP (broadcast address) in binary:
+# Invert host_bits first, from zeros to ones:
+host_bits_inverted = ''.join('1' if x == '0' else '0' for x in host_bits)
+broadcast_binary = binary_whole_ip[0:int(mask)] + host_bits_inverted
+# Convert to dotted decimal notation:
+broadcast_ip = str(int(broadcast_binary[0:8], 2)) + '.' + str(int(broadcast_binary[8:16], 2)) + '.' + str(int(broadcast_binary[16:24], 2)) + '.' + str(int(broadcast_binary[24:32], 2))
 
-# Turn host_bits (current binary zeros) to binary 1's for calculating number of available host IPs
-# Join found from StackOverflow - need to spend some more time learning this useful tool 
-# Explanation & examples here: https://www.tutorialspoint.com/python/string_join.htm
-# Found that I don't actually need this to work out the number of hosts. 
-# host_bits_inverted = ''.join('1' if x == '0' else '0' for x in host_bits)
-
+print('Network address:\t\t' + network_ip)
+print('Broadcast address:\t\t' + broadcast_ip)
 
 # Print the number of host IP's available:
 host_network_mask = '1' + host_bits
-print('Number of IPs in the subnet:\t\t\t' + str(int(host_network_mask, 2)))
-print('Number of host IPs available in this network:\t' + str(int(host_network_mask, 2) - 2))
-
-# Find interesting octet (network/host) boundary in subnet_mask: 
-for octet in subnet_mask_octets:
-    if octet != '255':
-       print(octet)
-       int_subnet_octet = subnet_mask_octets.index(octet)
-       break
-
-
-
-
+print('Number of IPs in the subnet:\t' + str(int(host_network_mask, 2)))
+print('Number of host IPs available:\t' + str(int(host_network_mask, 2) - 2))
+print('\n')
