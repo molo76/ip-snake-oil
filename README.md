@@ -12,8 +12,8 @@ Enter a string, for example 192.168.0.100/24. The script will output the followi
 
 Python3 based. 
 
-##### Sept 4th 2017 #####
-Working on sections to convert IP to binary values and to convert CIDR to binary and dotted decimal mask. 
-
 ##### Sept 13th 2017 #####
 Completed subnet mask work. Script outputs as expected. No user input validation yet. 
+
+##### Sept 4th 2017 #####
+Working on sections to convert IP to binary values and to convert CIDR to binary and dotted decimal mask. 
