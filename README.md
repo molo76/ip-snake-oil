@@ -1,12 +1,14 @@
 # ip-snake-oil
 A script to disassemble an IP/CIDR string and display relevant information. 
 
-Enter a string, for example 192.168.0.100/24. The script should output the following: 
+Enter a string, for example 192.168.0.100/24. The script will output the following: 
 
-* IP: 192.168.0.100
+* IP address: 192.168.0.100
 * Subnet Mask: 255.255.255.0
-* Network Host Range 192.168.0.1 - 192.168.0.254
-* Broadcast: 192.168.0.255
+* Network address: 192.168.0.0
+* Broadcast address: 192.168.0.255
+* Number of IPs in the subnet: 256
+* Number of host IPs available: 254
 
 Python3 based. 
 
