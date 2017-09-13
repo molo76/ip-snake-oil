@@ -1,8 +1,19 @@
 ## Python3 script for getting info about an IP/CIDR
+import sys
+import re
 
 # Get some user input
 print('\n')
 y = input('Enter an IP address with CIDR mask, for example 10.100.23.1/24:\n')
+
+######################
+## Input validation ##
+######################
+
+# Regex to match expected string, if not true end script
+regex = re.compile("\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\/\d{1,2}")
+if not regex.match(y):
+    sys.exit("aa! errors! please enter IP/mask in the correct format!")
 
 # Split the ip from the mask
 ip,mask = y.split('/')
