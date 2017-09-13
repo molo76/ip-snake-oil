@@ -67,6 +67,26 @@ print('Broadcast address:\t\t' + broadcast_ip)
 
 # Print the number of host IP's available:
 host_network_mask = '1' + host_bits
+<<<<<<< HEAD
 print('Number of IPs in the subnet:\t' + str(int(host_network_mask, 2)))
 print('Number of host IPs available:\t' + str(int(host_network_mask, 2) - 2))
 print('\n')
+=======
+print('Number of IPs in the subnet:\t\t\t' + str(int(host_network_mask, 2)))
+print('Number of host IPs available in this network:\t' + str(int(host_network_mask, 2) - 2))
+
+subnet_mask_list = []
+subnet_mask_list.append(str(int(mask_bits[0:8], 2)))
+subnet_mask_list.append(str(int(mask_bits[8:16], 2)))
+subnet_mask_list.append(str(int(mask_bits[16:24], 2)))
+subnet_mask_list.append(str(int(mask_bits[24:32], 2)))
+
+# Find interesting octet (network/host) boundary in subnet_mask: 
+for idx, octet in enumerate(subnet_mask_list):
+    if octet != '255':
+       int_oct = idx
+
+
+
+
+>>>>>>> afd80874296dead40b28ab63a0d5ff3bdf0c63e3
