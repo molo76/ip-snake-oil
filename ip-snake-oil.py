@@ -1,14 +1,19 @@
+#!/usr/bin/env python3
+
 ## Python3 script for getting info about an IP/CIDR
+
 import sys
 import re
 
-#
-if len (sys.argv) < 1:
+
+if len(sys.argv) == 1:
     # Get some user input
     print('\n')
     y = input('Enter an IP address with CIDR mask, for example 10.100.23.1/24:\n')
-if len (sys.argv) == 1:
-    y = (sys.argv[1])
+
+if len(sys.argv) > 1:
+    y = sys.argv[1]
+
 
 ######################
 ## Input validation ##
